@@ -16,7 +16,7 @@ saucesRouter.use(bodyParser.json())
 saucesRouter.use(authenticateUser)
 
 saucesRouter.get("/", getSauces)
-saucesRouter.post("/" , upload.single("image"), createSauce)
+saucesRouter.post("/", upload.single("image"), createSauce)
 saucesRouter.get("/:id", getSauceById)
 saucesRouter.delete("/:id", deleteSauce)
 saucesRouter.put("/:id", upload.single("image"), modifySauce)

@@ -9,7 +9,7 @@ manufacturer: String ,
 description: String ,
 mainPepper: String,
 imageUrl:  String ,
-heat: {type :Number , min :1 , max: 5},
+heat: {type :Number },
 likes: Number ,
 dislikes: Number ,
 usersLiked: [ String],
@@ -39,7 +39,7 @@ function deleteSauce(req, res) {
     Product.findByIdAndDelete(id)
     .then((product) =>  sendClientResponse(product ,res))
     .then((item) => deleteImage(item))
-    .then((res) => console.log("FILE DELETED" , res))
+    //.then((res) => console.log("FILE DELETED" , res))
     .catch((err) => res.status(500).send({ message: err}))
 }
 
@@ -54,12 +54,12 @@ function modifySauce(req ,res) {
     Product.findByIdAndUpdate(id, payload)
     .then((dbResponse) => sendClientResponse(dbResponse ,res))
     .then((product) => deleteImage(product))
-    .then((res) => console.log("FILE DELETED" , res))
+    //.then((res) => console.log("FILE DELETED" , res))
     .catch((err) => console.error("PROBLEM UPDATING", err))
 }
 
 function deleteImage(product) {
-    if(product == null) return
+    if (product == null) return
     console.log("DELETE IMAGE" , product)
     const imageToDelete = product.imageUrl.split("/").at(-1)
    return unlink("images/" + imageToDelete)
